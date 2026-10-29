@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------------------------------------------------------------------------
+   Wardrobe design tokens
+   Shared by the landing page (/) and the bootcamp one-pager (/one-pager).
+   Taupe, champagne and line are decorative; use ink/muted/burgundy for text.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-ivory: #f8f5f0;
+  --color-burgundy: #823a52;
+  --color-burgundy-dark: #60283d;
+  --color-taupe: #b7a79b;
+  --color-champagne: #d8c5b1;
+  --color-ink: #292524;
+  --color-muted: #6b5e56;
+  --color-line: #e3d9ce;
+  --color-sand: #efe6dc;
+}
+
+/* Desktop-width screens and print: the one-pager's full A4 layout. */
+@custom-variant sheet {
+  @media (min-width: 48rem) {
+    @slot;
+  }
+  @media print {
+    @slot;
+  }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-champagne);
+  color: var(--color-ink);
+}
+
+/* ---------------------------------------------------------------------------
+   Print — the one-pager is laid out as a single A4 sheet.
+--------------------------------------------------------------------------- */
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .a4-sheet {
+    width: 210mm;
+    height: 297mm;
+    max-width: none;
+    margin: 0;
+    overflow: hidden;
+    box-shadow: none;
+    break-after: avoid;
+    break-inside: avoid;
+  }
+
+  .avoid-break {
+    break-inside: avoid;
+  }
 }

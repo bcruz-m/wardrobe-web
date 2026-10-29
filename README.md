@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wardrobe — web
 
-## Getting Started
+Public pages for **Wardrobe**, an AI-powered digital closet (Vibe Coding Bootcamp project).
 
-First, run the development server:
+| Route | Purpose |
+|---|---|
+| `/` | Product landing page |
+| `/one-pager` | Bootcamp one-pager — prints on exactly one A4 page (Print / Save as PDF) |
+
+Built with Next.js (App Router), TypeScript and Tailwind CSS. No other runtime dependencies.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Updating content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All copy, images and links live in `src/content/`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `site.ts` — brand copy, screenshots and photo (`media`), external `links`, feature status (`prototypeStatus`)
+- `landing.ts` — landing page sections
+- `one-pager.ts` — one-pager sections
 
-## Learn More
+A link with `href: null` is shown as a labeled placeholder. An image with `src: null` is shown as a labeled placeholder.
 
-To learn more about Next.js, take a look at the following resources:
+Screenshots in `public/images/display/` are copies of the original app screenshots with the Expo Go developer button painted out (`swift assets/remove-dev-button.swift <original> <output.png>`). The originals are kept locally in `assets/originals/`, which is git-ignored so they are neither pushed nor deployed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy (Vercel)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Import the repository in Vercel with the default Next.js settings. No environment variables are required. The site is fully static — there is no backend.
