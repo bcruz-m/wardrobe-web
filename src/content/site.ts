@@ -110,6 +110,6 @@ export const prototypeStatus: { status: FeatureStatus; items: string[] }[] = [
 
 export const links: ExternalLink[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/dr-bruna-da-cruz/" },
-  { label: "GitHub Repository", href: null },
+  { label: "GitHub Repository", href: "https://github.com/bcruz-m/wardrobe-web" },
   { label: "Live Demo", href: null, note: "November 2" },
 ];
