@@ -1,5 +1,5 @@
 import { Media } from "@/components/ui/Media";
-import { heroScreens, media } from "@/content/site";
+import { heroScreens, media, screenshotAspect } from "@/content/site";
 
 // Staggered phone positions inside the 4:5 frame (no overlap, so no content is hidden).
 const positions = [
@@ -36,7 +36,7 @@ export function HeroVisual() {
         >
           <Media
             asset={screen}
-            className="aspect-[1206/2622] w-full"
+            className={`${screenshotAspect} w-full`}
             sizes="(min-width: 768px) 18vw, 44vw"
             priority={index === 0}
           />

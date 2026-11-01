@@ -43,36 +43,37 @@ export const media = {
     label: "Hero visual",
     hint: "Two app screenshots",
   },
-  // App screenshots: display copies with the Expo Go developer button painted
-  // out. Untouched originals are kept locally in assets/originals (git-ignored).
-  home: {
-    src: "/images/display/home.png",
-    alt: "Wardrobe home screen with a wardrobe summary, the AI Stylist “Style my day” card and recently added pieces",
+  // Genuine iPhone screenshots of the working prototype, with only the Expo Go
+  // developer button painted out and the iOS status bar cropped
+  // (assets/remove-dev-button.swift). Originals: assets/originals/app (git-ignored).
+  appHome: {
+    src: "/images/app/Home.png",
+    alt: "Wardrobe home screen with a weather card and styling tip, the AI Stylist “Style my day” card and recently added pieces",
     label: "Home",
     fit: "contain",
   },
-  aiStylist: {
-    src: "/images/display/ai-stylist.png",
-    alt: "AI Stylist “Style my day” screen showing a complete look of a denim shirt, wide-leg jeans, loafers and a metallic shoulder bag",
-    label: "AI Stylist",
+  appWardrobe: {
+    src: "/images/app/my-wardrobe.png",
+    alt: "My Wardrobe catalogue: background-cleaned clothing items with category filters, each labeled with type and colour",
+    label: "My Wardrobe",
     fit: "contain",
   },
-  digitalWardrobe: {
-    src: "/images/display/wardrobe.png",
-    alt: "My Wardrobe screen: a grid of background-removed clothing items, filterable by category and labeled with type and color",
-    label: "Digital Wardrobe",
+  appStyleMyDay: {
+    src: "/images/app/style-my-day.png",
+    alt: "Style My Day preferences: occasion, optional mood, styling direction and a switch to consider today's weather",
+    label: "Style My Day",
     fit: "contain",
   },
-  aiAnalysis: {
-    src: "/images/display/item-details.png",
-    alt: "Item details for a pair of loafers with AI-detected category, type and colors, and a “Build around this” button",
-    label: "AI Clothing Analysis",
+  appOutfitDetail: {
+    src: "/images/app/look-salvo.png",
+    alt: "An AI-composed look, “Chic Autumnal Brunch”, with its styling rationale and the “Saved to My Outfits” confirmation",
+    label: "Saved Look",
     fit: "contain",
   },
-  buildOutfit: {
-    src: "/images/display/build-outfit.png",
-    alt: "“Built around this piece” screen: an AI-composed look around brown loafers with a burgundy blazer, t-shirt, jeans and a shoulder bag",
-    label: "Build Around This",
+  appMyOutfits: {
+    src: "/images/app/my-outfits.png",
+    alt: "My Outfits: a gallery of saved looks in the Wardrobe tab",
+    label: "My Outfits",
     fit: "contain",
   },
   builderPhoto: {
@@ -82,34 +83,63 @@ export const media = {
   },
 } satisfies Record<string, MediaAsset>;
 
+/** Aspect ratio of the app screenshots (1206 × 2436 px after cropping the status bar). */
+export const screenshotAspect = "aspect-[1206/2436]";
+
 /** Landing hero screenshots (front, back). */
-export const heroScreens: MediaAsset[] = [media.home, media.aiStylist];
+export const heroScreens: MediaAsset[] = [media.appHome, media.appOutfitDetail];
 
-export type FeatureStatus = "Working" | "In Development" | "Future";
+export type FeatureStatus = "Working Prototype" | "Next" | "Future Research";
 
-/** Current state of the prototype — shared by the landing page and one-pager. */
+/**
+ * Current state of the prototype — shared by the landing page and one-pager.
+ * Checked against the wardrobe-app source on its integration/2026-q4 branch.
+ */
 export const prototypeStatus: { status: FeatureStatus; items: string[] }[] = [
   {
-    status: "Working",
+    status: "Working Prototype",
     items: [
-      "Digital Wardrobe",
       "AI Clothing Recognition",
-      "Background Removal",
-      "AI Outfit Recommendations",
+      "Editable Attributes",
+      "Background Cleanup",
+      "Style My Day",
+      "Optional Weather",
+      "Build Around This",
+      "Save Look & My Outfits",
+      "English, German & Portuguese Interface",
     ],
   },
   {
-    status: "In Development",
-    items: ["Outfit Saving", "Image Cropping", "UX Refinements"],
+    status: "Next",
+    items: ["Replace, Retake & Crop Photos", "Cleanup Retry"],
   },
   {
-    status: "Future",
+    status: "Future Research",
     items: ["Virtual Try-On", "Style Inspiration", "Smart Shopping"],
   },
 ];
 
+export const prototypeNote =
+  "A working mobile prototype, not a publicly released app. AI Stylist features currently run in a development build; AI-generated text has not yet been validated in every language.";
+
+/** Public production URL (Vercel). Used for absolute links, e.g. in the printed one-pager. */
+export const siteUrl = "https://wardrobe-by-b.vercel.app";
+
+/**
+ * Demo video, served from this site (public/video) so its URL stays stable.
+ * Byte-identical copy of the "Wardrobe-demo-2026-11-01-v2.mp4" asset from the
+ * wardrobe-final-2026 GitHub release; the poster is an unedited frame from it.
+ */
+export const demoVideo = {
+  label: "Watch the Demo",
+  src: "/video/wardrobe-demo.mp4",
+  poster: "/video/wardrobe-demo-poster.jpg",
+  sectionId: "demo",
+  caption: "1:26 · Edited iPhone screen recording of the working prototype · wait times shortened · no sound",
+};
+
 export const links: ExternalLink[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/dr-bruna-da-cruz/" },
   { label: "GitHub Repository", href: "https://github.com/bcruz-m/wardrobe-web" },
-  { label: "Live Demo", href: null, note: "November 2" },
+  { label: demoVideo.label, href: `${siteUrl}/#${demoVideo.sectionId}` },
 ];

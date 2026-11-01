@@ -3,15 +3,16 @@ import { media, type FeatureStatus } from "@/content/site";
 export const nav = [
   { label: "The Idea", href: "#problem" },
   { label: "How It Works", href: "#how-it-works" },
+  { label: "Demo", href: "#demo" },
   { label: "Vision", href: "#vision" },
 ];
 
 export const hero = {
-  eyebrow: "Wardrobe",
+  eyebrow: "Wardrobe · Where Fashion Meets AI",
   headline: "Beyond the Closet",
   tagline: "Wear more of what you own.",
   description:
-    "An AI-powered personal wardrobe designed to help you rediscover your clothes, explore new outfit possibilities, and make getting dressed more intentional.",
+    "An AI-powered personal wardrobe — now a working mobile prototype — designed to help you rediscover your clothes, explore new outfit possibilities, and make getting dressed more intentional.",
   cta: "Explore Wardrobe",
 };
 
@@ -40,52 +41,57 @@ export const howItWorks = {
   steps: [
     {
       number: "01",
-      title: "Digitize Your Closet",
-      screenshot: media.aiAnalysis,
-      text: "Add clothing and accessories using your camera or photo library. AI helps identify clothing attributes and removes the background, reducing manual input.",
+      title: "Digitize",
+      screenshot: media.appWardrobe,
+      text: "Photograph a piece or choose one from your library. AI suggests its category, colours and details — every field stays editable. Background cleanup runs separately and keeps the original photo alongside the cleaned cut-out.",
     },
     {
       number: "02",
-      title: "Rediscover What You Own",
-      screenshot: media.digitalWardrobe,
-      text: "Explore your wardrobe through a clean, intuitive interface. Find your pieces, review their details, and keep your collection organized.",
+      title: "Style My Day",
+      screenshot: media.appStyleMyDay,
+      status: "AI Stylist — Development Build",
+      text: "Choose an occasion, a mood and a styling direction — and, if you like, let today's weather shape the look. AI composes complete outfits from pieces you already own. Build Around This starts from a single item.",
     },
     {
       number: "03",
-      title: "Discover New Combinations",
-      screenshot: media.buildOutfit,
-      status: "AI Styling — Working Prototype",
-      text: "AI composes complete looks from pieces you already own — for the day, or built around a single piece. Saving your favorite outfits is in development.",
+      title: "Rediscover",
+      screenshot: media.appMyOutfits,
+      text: "Save a look you love and find it again in My Outfits, alongside a catalogue of everything you own.",
     },
   ],
 };
 
-// Descriptions are forward-looking draft copy — review before publishing.
+export const demo = {
+  eyebrow: "The Demo",
+  headline: "The working prototype, in motion.",
+  text: "From adding a piece to saving a look: a short walkthrough of Wardrobe on iPhone.",
+};
+
 export const vision = {
   eyebrow: "The Vision",
   headline: "Beyond organization. Toward personal style.",
   intro:
-    "Where Wardrobe is heading. None of the features below are available yet.",
+    "Wardrobe is growing toward styling that feels intuitive and personal — an AI companion that understands your clothes, your day and your taste, and helps you wear more of what you own.",
+  today: {
+    status: "Working Prototype",
+    text: "Already in the prototype: digitizing your closet, Style My Day, Build Around This and My Outfits.",
+  },
+  futureLabel: "Future research — not yet available",
   features: [
     {
       title: "Virtual Try-On",
-      status: "Future",
-      text: "A way to preview a combination before you put it on.",
+      status: "Future Research",
+      text: "Research into previewing a combination before you put it on.",
     },
     {
       title: "Style Inspiration",
-      status: "Future",
+      status: "Future Research",
       text: "Inspiration that starts from your own closet.",
     },
     {
       title: "Smart Shopping",
-      status: "Future",
+      status: "Future Research",
       text: "Knowing what you have before deciding what to add.",
-    },
-    {
-      title: "Travel & Capsule Wardrobes",
-      status: "Future",
-      text: "Versatile, edited collections for a trip or a season.",
     },
   ] satisfies { title: string; status: FeatureStatus; text: string }[],
 };

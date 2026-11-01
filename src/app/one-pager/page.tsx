@@ -5,17 +5,17 @@ import { SheetLabel, SheetRule } from "@/components/one-pager/SheetSection";
 import { Media } from "@/components/ui/Media";
 import { Wordmark } from "@/components/ui/Wordmark";
 import { onePager } from "@/content/one-pager";
-import { brand, links, media, prototypeStatus, type FeatureStatus } from "@/content/site";
+import { brand, links, media, prototypeStatus, screenshotAspect, type FeatureStatus } from "@/content/site";
 
 const statusDot: Record<FeatureStatus, string> = {
-  Working: "bg-burgundy",
-  "In Development": "border border-burgundy",
-  Future: "bg-taupe",
+  "Working Prototype": "bg-burgundy",
+  Next: "border border-burgundy",
+  "Future Research": "bg-taupe",
 };
 
 export const metadata: Metadata = {
   title: "Project One-Pager",
-  description: `${brand.presentationTitle} — ${brand.presentationSubtitle}. Vibe Coding Bootcamp final check-in.`,
+  description: `${brand.presentationTitle} — ${brand.presentationSubtitle}. Vibe Coding Bootcamp final presentation.`,
 };
 
 export default function OnePagerPage() {
@@ -104,12 +104,12 @@ export default function OnePagerPage() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-[3mm] sheet:col-span-5">
-              {[media.digitalWardrobe, media.aiStylist].map((screen) => (
+              {[media.appHome, media.appStyleMyDay].map((screen) => (
                 <figure key={screen.label} className="flex flex-col items-center gap-[1.5mm]">
                   <Media
                     asset={screen}
                     size="sm"
-                    className="aspect-[1206/2622] h-[64mm] overflow-hidden rounded-[2.5mm] border border-line"
+                    className={`${screenshotAspect} h-[64mm] overflow-hidden rounded-[2.5mm] border border-line`}
                     sizes="35mm"
                   />
                   <figcaption className="text-[0.68em] font-medium uppercase tracking-[0.2em] text-muted">
@@ -123,7 +123,7 @@ export default function OnePagerPage() {
           {/* Prototype status */}
           <section className="avoid-break flex flex-col gap-[2mm] border-y border-line py-[3mm]">
             <SheetLabel>{status.eyebrow}</SheetLabel>
-            <dl className="grid gap-[3mm] sheet:grid-cols-3 sheet:gap-[6mm]">
+            <dl className="grid gap-[3mm] sheet:grid-cols-[5fr_2fr_2fr] sheet:gap-[6mm]">
               {prototypeStatus.map((group) => (
                 <div key={group.status} className="flex flex-col gap-[0.8mm]">
                   <dt className="flex items-center gap-[1.5mm] text-[0.7em] font-semibold uppercase tracking-[0.2em] text-ink">
@@ -134,6 +134,7 @@ export default function OnePagerPage() {
                 </div>
               ))}
             </dl>
+            <p className="text-[0.85em] italic text-muted">{status.note}</p>
           </section>
 
           {/* Talk */}
@@ -167,12 +168,13 @@ export default function OnePagerPage() {
 
           {/* Builder + links */}
           <section className="avoid-break grid gap-[5mm] border-t border-line pt-[4.5mm] sheet:grid-cols-12">
-            <div className="flex gap-[4mm] sheet:col-span-8">
+            <div className="flex items-start gap-[5mm] sheet:col-span-8">
+              {/* Portrait 4:5, top aligned with the cap height of the label beside it. */}
               <Media
                 asset={media.builderPhoto}
                 size="sm"
-                className="aspect-square w-[25mm] shrink-0 self-start"
-                sizes="25mm"
+                className="aspect-[4/5] w-[23mm] shrink-0 mt-[0.8mm]"
+                sizes="23mm"
               />
               <div className="flex flex-col gap-[1mm]">
                 <SheetLabel>{builder.eyebrow}</SheetLabel>

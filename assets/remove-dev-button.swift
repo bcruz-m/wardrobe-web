@@ -1,13 +1,13 @@
-// Usage: swift remove-dev-button.swift <input> <output.png>
+// Usage: swift remove-dev-button.swift <input> <output.png> [cropTop]
 // Paints out the blue Expo Go dev-menu button in the top-right corner of a
-// screenshot. Rows above any content frame are filled with the flat page
-// background; rows inside a frame are filled from the pixel directly below
-// the button, which preserves vertical frame edges.
+// screenshot. Rows above any content frame are filled with the page
+// background beside the button; rows inside a frame are filled from the pixel
+// directly below the button, which preserves vertical frame edges.
 import AppKit
 import CoreGraphics
 
 let args = CommandLine.arguments
-guard args.count == 3,
+guard args.count == 3 || args.count == 4,
       let src = NSImage(contentsOfFile: args[1]),
       let cg = src.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
     fatalError("cannot load input")
@@ -51,18 +51,23 @@ for y in y0...y1 {
     if abs(r - bg.0) + abs(g - bg.1) + abs(b - bg.2) > 12 { frameTop = y; break }
 }
 
-// Flat page background, sampled from a clean spot on the right margin.
-let flat = idx(w - 3, h / 4)
+// Header rows are filled with the background just left of the box on the same
+// row (outside the button's shadow), so the fill matches the screen exactly.
+let sampleX = max(0, x0 - 8)
 
 // 3. Fill.
 for y in y0...y1 {
     for x in x0...x1 {
-        let s = y < frameTop ? flat : idx(x, y1 + 2), d = idx(x, y)
+        let s = y < frameTop ? idx(sampleX, y) : idx(x, y1 + 2), d = idx(x, y)
         px[d] = px[s]; px[d + 1] = px[s + 1]; px[d + 2] = px[s + 2]; px[d + 3] = px[s + 3]
     }
 }
 
-let out = ctx.makeImage()!
+// 4. Optionally drop the top `cropTop` rows (the iOS status bar), nothing else.
+//    186 px = the 62 pt top safe area on a 3x iPhone screenshot.
+let cropTop = args.count == 4 ? Int(args[3])! : 0
+let full = ctx.makeImage()!
+let out = full.cropping(to: CGRect(x: 0, y: cropTop, width: w, height: h - cropTop))!
 let rep = NSBitmapImageRep(cgImage: out)
 try! rep.representation(using: .png, properties: [:])!.write(to: URL(fileURLWithPath: args[2]))
-print("\(args[1]): button box x\(x0)-\(x1) y\(y0)-\(y1), frameTop \(frameTop == y1 + 1 ? "none" : String(frameTop))")
+print("\(args[1]): \(w)x\(h - cropTop) (cropped \(cropTop) px), button box x\(x0)-\(x1) y\(y0)-\(y1), frameTop \(frameTop == y1 + 1 ? "none" : String(frameTop))")

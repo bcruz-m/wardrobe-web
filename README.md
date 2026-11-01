@@ -28,7 +28,13 @@ All copy, images and links live in `src/content/`:
 
 A link with `href: null` is shown as a labeled placeholder. An image with `src: null` is shown as a labeled placeholder.
 
-Screenshots in `public/images/display/` are copies of the original app screenshots with the Expo Go developer button painted out (`swift assets/remove-dev-button.swift <original> <output.png>`). The originals are kept locally in `assets/originals/`, which is git-ignored so they are neither pushed nor deployed.
+Screenshots in `public/images/app/` are the original iPhone screenshots with only the Expo Go developer button painted out and the iOS status bar cropped:
+
+```bash
+swift assets/remove-dev-button.swift assets/originals/app/Home.png public/images/app/Home.png 186
+```
+
+The originals are kept locally in `assets/originals/`, which is git-ignored so they are neither pushed nor deployed.
 
 ## Deploy (Vercel)
 

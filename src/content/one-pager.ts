@@ -1,5 +1,5 @@
 export const onePager = {
-  header: "Vibe Coding Bootcamp · Final Check-In",
+  header: "Final Presentation — November 2, 2026",
   summary:
     "Wardrobe is an AI-powered digital closet designed to help people organize their clothing, rediscover pieces they already own, and explore new outfit possibilities.",
   idea: {
@@ -13,14 +13,14 @@ export const onePager = {
   prototype: {
     eyebrow: "From Idea to Prototype",
     paragraphs: [
-      "What began as research and feature exploration has evolved into a working mobile prototype.",
-      "Built with React Native, Expo, Supabase, and AI-powered image analysis, Wardrobe allows users to add, organize, and manage clothing items.",
-      "The development process focuses on reducing manual input, creating an intuitive experience, and designing modular components that can evolve independently.",
+      "What began as research and feature exploration has evolved into a working mobile prototype, built from modular components that can evolve independently.",
+      "Users add and organize clothing with AI recognition and background cleanup, compose looks with Style My Day and Build Around This, and save them to My Outfits.",
     ],
-    stack: ["React Native", "Expo", "Supabase", "AI image analysis"],
+    stack: ["React Native / Expo", "Supabase", "Gemini", "BiRefNet-lite"],
   },
   status: {
     eyebrow: "Prototype Status",
+    note: "Not a publicly released app · AI Stylist runs in a development build · AI text not yet validated in every language",
   },
   talk: {
     eyebrow: "What the Talk Covers",
@@ -38,7 +38,7 @@ export const onePager = {
       {
         number: "03",
         title: "Beyond the MVP",
-        text: "AI-powered styling, virtual try-on, and a more personalized wardrobe experience.",
+        text: "Photo improvements, virtual try-on research, and a more personal styling experience.",
       },
     ],
   },
@@ -47,7 +47,7 @@ export const onePager = {
     items: [
       {
         title: "Built",
-        text: "A working mobile prototype with a digital wardrobe, AI clothing recognition, background removal, and AI outfit recommendations.",
+        text: "A working mobile prototype: an AI-assisted digital wardrobe, AI styling with Style My Day and Build Around This, and saved looks in My Outfits.",
       },
       {
         title: "Learned",
@@ -55,7 +55,7 @@ export const onePager = {
       },
       {
         title: "Next",
-        text: "Outfit saving, image cropping, and UX refinements — then virtual try-on, style inspiration, and smart shopping.",
+        text: "Replace, retake and crop photos, and cleanup retry — then virtual try-on research.",
       },
     ],
   },

@@ -9,13 +9,14 @@ import { StatusTag } from "@/components/ui/StatusTag";
 import { Wordmark } from "@/components/ui/Wordmark";
 import {
   comingSoon,
+  demo,
   hero,
   howItWorks,
   problem,
   solution,
   vision,
 } from "@/content/landing";
-import { prototypeStatus } from "@/content/site";
+import { demoVideo, prototypeNote, prototypeStatus, screenshotAspect } from "@/content/site";
 
 export default function Home() {
   return (
@@ -40,10 +41,14 @@ export default function Home() {
               <p className="max-w-lg text-base leading-relaxed text-muted sm:text-lg">
                 {hero.description}
               </p>
-              <div>
+              <div className="flex flex-wrap gap-4">
                 <ButtonLink href="#how-it-works">
                   {hero.cta}
                   <span aria-hidden="true">→</span>
+                </ButtonLink>
+                <ButtonLink href={`#${demoVideo.sectionId}`} variant="outline">
+                  <span aria-hidden="true">▶</span>
+                  {demoVideo.label}
                 </ButtonLink>
               </div>
             </div>
@@ -110,12 +115,13 @@ export default function Home() {
                 <div className="flex h-[26rem] items-center justify-center bg-sand lg:h-[28rem]">
                   <Media
                     asset={step.screenshot}
-                    className="aspect-[1206/2622] h-[86%] overflow-hidden rounded-[1rem] shadow-[0_18px_40px_-22px_rgb(41_37_36/0.45)]"
+                    className={`${screenshotAspect} h-[86%] overflow-hidden rounded-[1rem] shadow-[0_18px_40px_-22px_rgb(41_37_36/0.45)]`}
                     sizes="(min-width: 768px) 200px, 190px"
                   />
                 </div>
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <span className="font-serif text-5xl leading-none font-light text-burgundy transition-transform duration-500 group-hover:-translate-y-1">
+                <div className="flex flex-wrap content-start items-center justify-between gap-3">
+                  {/* Lining figures: Cormorant's default old-style 3 drops below the baseline. */}
+                  <span className="font-serif text-5xl leading-none font-light text-burgundy lining-nums tabular-nums transition-transform duration-500 group-hover:-translate-y-1">
                     {step.number}
                   </span>
                   {step.status && <StatusTag>{step.status}</StatusTag>}
@@ -127,9 +133,12 @@ export default function Home() {
           </ol>
 
           <div className="mt-16 flex flex-col gap-8">
-            <h3 className="font-serif text-2xl text-ink sm:text-3xl">
-              {howItWorks.statusTitle}
-            </h3>
+            <div className="flex flex-col gap-3">
+              <h3 className="font-serif text-2xl text-ink sm:text-3xl">
+                {howItWorks.statusTitle}
+              </h3>
+              <p className="max-w-3xl leading-relaxed text-muted">{prototypeNote}</p>
+            </div>
             <dl className="grid gap-8 sm:grid-cols-3">
               {prototypeStatus.map((group) => (
                 <div key={group.status} className="flex flex-col gap-4 border-t border-line pt-5">
@@ -149,6 +158,44 @@ export default function Home() {
           </div>
         </Section>
 
+        {/* Demo */}
+        <Section id={demoVideo.sectionId} tone="tinted">
+          <div className="flex flex-col gap-10">
+            <div className="grid gap-6 md:grid-cols-12 md:items-end">
+              <SectionHeading
+                id={`${demoVideo.sectionId}-title`}
+                eyebrow={demo.eyebrow}
+                title={demo.headline}
+                className="md:col-span-7"
+              />
+              <p className="text-lg leading-relaxed text-muted md:col-span-5">{demo.text}</p>
+            </div>
+            <figure className="flex flex-col gap-4">
+              <div className="relative bg-ivory p-2 shadow-[0_24px_50px_-30px_rgb(41_37_36/0.45)] sm:p-3">
+                <span aria-hidden="true" className="pointer-events-none absolute inset-0 border border-champagne" />
+                {/* Plays only when the viewer presses play; nothing loads until then. */}
+                <video
+                  className="aspect-video w-full bg-sand"
+                  controls
+                  preload="none"
+                  playsInline
+                  poster={demoVideo.poster}
+                  aria-describedby={`${demoVideo.sectionId}-caption`}
+                >
+                  <source src={demoVideo.src} type="video/mp4" />
+                  <a href={demoVideo.src}>{demoVideo.label}</a>
+                </video>
+              </div>
+              <figcaption
+                id={`${demoVideo.sectionId}-caption`}
+                className="text-xs uppercase tracking-[0.18em] text-muted"
+              >
+                {demoVideo.caption}
+              </figcaption>
+            </figure>
+          </div>
+        </Section>
+
         {/* Vision */}
         <Section id="vision" tone="dark">
           <div className="grid gap-12 md:grid-cols-12">
@@ -160,25 +207,34 @@ export default function Home() {
                 tone="dark"
               />
               <p className="leading-relaxed text-champagne">{vision.intro}</p>
+              <div className="flex flex-col items-start gap-3 border-t border-ivory/15 pt-6">
+                <StatusTag tone="dark">{vision.today.status}</StatusTag>
+                <p className="text-sm leading-relaxed text-ivory">{vision.today.text}</p>
+              </div>
             </div>
-            <ul className="md:col-span-6 md:col-start-7">
-              {vision.features.map((feature) => (
-                <li
-                  key={feature.title}
-                  className="flex flex-col gap-3 border-b border-ivory/15 py-6 first:pt-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
-                >
-                  <div className="flex flex-col gap-1">
-                    <h3 className="font-serif text-2xl text-ivory sm:text-3xl">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-champagne">{feature.text}</p>
-                  </div>
-                  <StatusTag tone="dark" className="shrink-0 self-start sm:self-auto">
-                    {feature.status}
-                  </StatusTag>
-                </li>
-              ))}
-            </ul>
+            <div className="flex flex-col gap-6 md:col-span-6 md:col-start-7">
+              <p className="text-[0.7rem] font-medium uppercase tracking-[0.3em] text-champagne">
+                {vision.futureLabel}
+              </p>
+              <ul>
+                {vision.features.map((feature) => (
+                  <li
+                    key={feature.title}
+                    className="flex flex-col gap-3 border-b border-ivory/15 py-6 first:pt-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                  >
+                    <div className="flex flex-col gap-1">
+                      <h3 className="font-serif text-2xl text-ivory sm:text-3xl">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed text-champagne">{feature.text}</p>
+                    </div>
+                    <StatusTag tone="dark" className="shrink-0 self-start sm:self-auto">
+                      {feature.status}
+                    </StatusTag>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </Section>
 
