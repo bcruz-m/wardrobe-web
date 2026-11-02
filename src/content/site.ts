@@ -127,15 +127,15 @@ export const siteUrl = "https://wardrobe-by-b.vercel.app";
 
 /**
  * Demo video, served from this site (public/video) so its URL stays stable.
- * Byte-identical copy of the "Wardrobe-demo-2026-11-01-v2.mp4" asset from the
- * wardrobe-final-2026 GitHub release; the poster is an unedited frame from it.
+ * Byte-identical copy of "Wardrobe-demo-FINAL-with-weather.mp4" (1:36); the
+ * poster is an unedited frame of the same opening title card.
  */
 export const demoVideo = {
   label: "Watch the Demo",
   src: "/video/wardrobe-demo.mp4",
   poster: "/video/wardrobe-demo-poster.jpg",
   sectionId: "demo",
-  caption: "1:26 · Edited iPhone screen recording of the working prototype · wait times shortened · no sound",
+  caption: "1:36 · Edited iPhone screen recording of the working prototype · wait times shortened · no sound",
 };
 
 export const links: ExternalLink[] = [
